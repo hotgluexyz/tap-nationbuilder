@@ -23,7 +23,7 @@ class ContactsStream(NationBuilderStream):
         self.validate_response(response)
         return response
 
-    def extract_type(field):
+    def extract_type(self, field):
         if isinstance(field, str):
             return th.StringType
         if isinstance(field, float):
@@ -43,7 +43,7 @@ class ContactsStream(NationBuilderStream):
         url = self.url_base + self.path + "/1"
         response = self.request_decorator(self.request_schema)(url, headers=headers)
 
-        fields = response.json()
+        fields = response.json().get("person") or dict()
         for field in fields:
             property = th.Property(field, self.extract_type(field))
             properties.append(property)
