@@ -39,7 +39,7 @@ class NationBuilderStream(RESTStream):
         Returns:
             An authenticator instance.
         """
-        return NationBuilderAuthenticator.create_for_stream(self)
+        return NationBuilderAuthenticator.create_for_stream(self, f"https://{self.config.get('subdomain')}.nationbuilder.com/oauth/token")
 
     @property
     def http_headers(self) -> dict:

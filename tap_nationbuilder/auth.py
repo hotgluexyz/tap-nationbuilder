@@ -40,7 +40,7 @@ class NationBuilderAuthenticator(OAuthAuthenticator, metaclass=SingletonMeta):
         }
 
     @classmethod
-    def create_for_stream(cls, stream) -> "NationBuilderAuthenticator":
+    def create_for_stream(cls, stream, auth_endpoint) -> "NationBuilderAuthenticator":
         """Instantiate an authenticator for a specific Singer stream.
 
         Args:
@@ -51,8 +51,7 @@ class NationBuilderAuthenticator(OAuthAuthenticator, metaclass=SingletonMeta):
         """
         return cls(
             stream=stream,
-            # TODO: Customize subdomain
-            auth_endpoint="https://hotglue.nationbuilder.com/oauth/token",
+            auth_endpoint=auth_endpoint,
         )
 
     # Authentication and refresh
