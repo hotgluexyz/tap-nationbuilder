@@ -5,7 +5,7 @@ from __future__ import annotations
 from pathlib import Path
 import requests
 
-from singer_sdk import typing as th  # JSON Schema typing helpers
+from hotglue_singer_sdk import typing as th  # JSON Schema typing helpers
 from cached_property import cached_property
 
 from tap_nationbuilder.client import NationBuilderStream

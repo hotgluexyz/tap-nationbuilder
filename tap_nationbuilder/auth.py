@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
-from singer_sdk.authenticators import OAuthAuthenticator, SingletonMeta
+from hotglue_singer_sdk.authenticators import OAuthAuthenticator, SingletonMeta
 from datetime import datetime
-from singer_sdk.helpers._util import utc_now
+from hotglue_singer_sdk.helpers._util import utc_now
 import requests
 import json
 
@@ -12,17 +12,6 @@ import json
 # If this behaviour interferes with your use-case, you can remove the metaclass.
 class NationBuilderAuthenticator(OAuthAuthenticator, metaclass=SingletonMeta):
     """Authenticator class for NationBuilder."""
-
-    def __init__(
-        self,
-        stream,
-        auth_endpoint: str | None = None,
-        oauth_scopes: str | None = None,
-        default_expiration: int | None = None,
-    ) -> None:
-        super().__init__(stream=stream, auth_endpoint=auth_endpoint, oauth_scopes=oauth_scopes, default_expiration=default_expiration)
-        self._tap = stream._tap
-
 
     @property
     def oauth_request_body(self) -> dict:
@@ -55,7 +44,7 @@ class NationBuilderAuthenticator(OAuthAuthenticator, metaclass=SingletonMeta):
         )
 
     # Authentication and refresh
-    def update_access_token(self) -> None:
+    def _update_access_token_locally(self) -> None:
         """Update `access_token` along with: `last_refreshed` and `expires_in`.
 
         Raises:

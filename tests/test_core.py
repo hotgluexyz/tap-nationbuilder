@@ -2,7 +2,7 @@
 
 import datetime
 
-from singer_sdk.testing import get_tap_test_class
+from hotglue_singer_sdk.testing import get_tap_test_class
 
 from tap_nationbuilder.tap import TapNationBuilder
 
